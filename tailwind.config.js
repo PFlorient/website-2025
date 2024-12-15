@@ -2,8 +2,15 @@
 export default {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "var(--primary-color)",
+        secondary: "var(--white)",
+      },
+      fontFamily: {
+        neueMetana: ["Neue-Metana", "sans-serif"],
+      },
+    },
   },
   plugins: [],
-}
-
+};

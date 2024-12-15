@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Neue-Metana";
+  src: url("../../fonts/Neue-Metana/NeueMetana-Regular.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Neue-Metana";
+  src: url("../../fonts/Neue-Metana/NeueMetana-Bold.otf");
+  font-weight: 700;
+}

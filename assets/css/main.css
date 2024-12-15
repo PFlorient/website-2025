@@ -1,7 +1,7 @@
 @import "./config/_colors.css";
 @import "./config/_typo.css";
-@import "./config/_layer.css";
-@import "./config/_common.css";
+/* @import "./config/_layer.css";
+@import "./config/_common.css"; */
 
 @tailwind base;
 @tailwind components;

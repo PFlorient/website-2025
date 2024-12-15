@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  modules: ["@nuxtjs/i18n", "@nuxtjs/tailwindcss"],
+  modules: ["@nuxtjs/i18n", "@nuxtjs/tailwindcss", "@nuxt/eslint"],
   css: ["~/assets/css/main.css"],
   components: [
     {
@@ -10,4 +10,7 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  typescript: {
+    typeCheck: true,
+  },
 });

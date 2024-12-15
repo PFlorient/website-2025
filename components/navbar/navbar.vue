@@ -1,6 +1,8 @@
 <template>
-  <nav class="flex w-full justify-between">
-    <span>test</span>
-    <span>info</span>
+  <nav
+    class="flex w-full justify-between p-4 fixed top-0 z-20 mix-blend-difference bg-transparent invert"
+  >
+    <h1>Florient</h1>
+    <span>Info</span>
   </nav>
 </template>

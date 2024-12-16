@@ -64,20 +64,20 @@ const handleClick = () => {
   if (leftRef.value) {
     // Animation pour agrandir la div texte
     gsap.to(leftRef.value, {
-      duration: 0.5,
+      duration: 0.7,
       width: "100%", // Étend la div texte à 100% de la largeur
       height: "100%", // Étend la div texte à toute la hauteur
       ease: "power2.out", // Léger ease-out sur la fin
       onComplete: () => {
-        gsap.to(textH2.value, {
-          duration: 0.1, // Animation rapide pour effacer le texte
-          clipPath: "inset(0 0 0 100%)", // Masque le texte de gauche à droite
-          ease: "none", // Pas d'effet d'accélération/décélération
-          onComplete: () => {
-            // Redirection après l'effacement
-            router.push(`/${props.title}`);
-          },
-        });
+        router.push(`/${props.title}`);
+      },
+    });
+    gsap.to(textH2.value, {
+      duration: 0.3, // Animation rapide pour effacer le texte
+      clipPath: "inset(0 0 0 100%)", // Masque le texte de gauche à droite
+      ease: "none", // Pas d'effet d'accélération/décélération
+      onComplete: () => {
+        // Redirection après l'effacement
       },
     });
   }

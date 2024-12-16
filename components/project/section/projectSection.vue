@@ -1,75 +1,91 @@
 <template>
-  <NuxtLink class="section-link" :to="`/${title}`">
+  <div
+    class="section-link"
+    :class="{ inverted: inverted }"
+    @click="handleClick"
+  >
     <section
       ref="sectionRef"
       :class="[
-        'flex w-screen h-screen cursor-pointer',
-        { 'flex-row-reverse': inverted },
+        'relative flex w-screen h-screen cursor-pointer overflow-hidden',
+        inverted ? 'flex-row-reverse' : '',
       ]"
     >
-      <h2 ref="leftRef" class="w-1/2 flex items-end text-6xl font-bold p-8">
-        {{ title }}
-      </h2>
+      <!-- Conteneur pour le texte -->
+      <div
+        ref="leftRef"
+        class="text-container absolute top-0 h-full flex items-end p-8 bg-secondary z-10"
+        :class="[
+          'w-1/2',
+          inverted
+            ? 'right-0'
+            : 'left-0' /* Position correcte selon inverted */,
+        ]"
+      >
+        <h2 ref="textH2" class="text-6xl font-bold">
+          {{ title }}
+        </h2>
+      </div>
 
+      <!-- Image -->
       <img
         ref="rightRef"
-        class="w-1/2"
+        class="absolute top-0 h-full object-cover z-0"
+        :class="[
+          'w-1/2',
+          inverted
+            ? 'left-0'
+            : 'right-0' /* Position correcte selon inverted */,
+        ]"
         src="https://picsum.photos/200/300"
         alt=""
       />
     </section>
-  </NuxtLink>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { gsap } from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { useRouter } from "vue-router";
 
-gsap.registerPlugin(ScrollTrigger);
-
-defineProps<{
+const props = defineProps<{
   title: string;
   img: string;
+  animation?: boolean;
   inverted?: boolean;
 }>();
 
 const sectionRef = ref<HTMLElement | null>(null);
 const leftRef = ref<HTMLElement | null>(null);
-const rightRef = ref<HTMLElement | null>(null);
-onMounted(() => {
-  if (sectionRef.value && leftRef.value && rightRef.value) {
-    // Animation GSAP
-    gsap.fromTo(
-      leftRef.value,
-      { y: "-100%", opacity: 0 },
-      {
-        y: "0%",
-        opacity: 1,
-        scrollTrigger: {
-          trigger: sectionRef.value,
-          start: "top bottom", // Start lorsque la section entre dans le viewport
-          end: "center center", // Fin lorsque la section est centrée
-          scrub: true, // Synchronise avec le scroll
-        },
-      }
-    );
+const textH2 = ref<HTMLElement | null>(null);
+const router = useRouter();
 
-    gsap.fromTo(
-      rightRef.value,
-      { y: "100%", opacity: 0 },
-      {
-        y: "0%",
-        opacity: 1,
-        scrollTrigger: {
-          trigger: sectionRef.value,
-          start: "top bottom",
-          end: "center center",
-          scrub: true,
-        },
-      }
-    );
+const handleClick = () => {
+  if (leftRef.value) {
+    // Animation pour agrandir la div texte
+    gsap.to(leftRef.value, {
+      duration: 0.5,
+      width: "100%", // Étend la div texte à 100% de la largeur
+      height: "100%", // Étend la div texte à toute la hauteur
+      ease: "power2.out", // Léger ease-out sur la fin
+      onComplete: () => {
+        gsap.to(textH2.value, {
+          duration: 0.1, // Animation rapide pour effacer le texte
+          clipPath: "inset(0 0 0 100%)", // Masque le texte de gauche à droite
+          ease: "none", // Pas d'effet d'accélération/décélération
+          onComplete: () => {
+            // Redirection après l'effacement
+            router.push(`/${props.title}`);
+          },
+        });
+      },
+    });
   }
-});
+};
 </script>
 
-<style></style>
+<style>
+.section-link {
+  overflow: hidden; /* Empêche les débordements lors des animations */
+}
+</style>

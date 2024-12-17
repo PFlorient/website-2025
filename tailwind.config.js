@@ -9,6 +9,7 @@ export default {
       },
       fontFamily: {
         neueMetana: ["Neue-Metana", "sans-serif"],
+        lato: ["Lato", "sans-serif"],
       },
     },
   },

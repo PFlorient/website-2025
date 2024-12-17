@@ -27,8 +27,8 @@ onMounted(() => {
   panels.forEach((panel: any) => {
     ScrollTrigger.create({
       trigger: panel as any,
-      //   start: () =>
-      //     panel.offsetHeight < window.innerHeight ? "top top" : "bottom bottom", // if it's shorter than the viewport, we prefer to pin it at the top
+      start: () =>
+        panel.offsetHeight < window.innerHeight ? "top top" : "bottom bottom", // if it's shorter than the viewport, we prefer to pin it at the top
       pin: true,
       pinSpacing: false,
     });

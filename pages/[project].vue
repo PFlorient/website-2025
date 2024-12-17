@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { gsap } from "gsap";
+
 const textH1 = ref<HTMLElement | null>(null);
 const period = ref<HTMLElement | null>(null);
 const description = ref<HTMLElement | null>(null);
@@ -65,6 +66,25 @@ onMounted(() => {
         "-=0.3"
       ); // Commencer légèrement avant la fin de l'animation précédente
   }
+});
+
+onBeforeRouteLeave((to, from, next) => {
+  // Inverse l'animation lors du démontage du composant
+  gsap.to([textH1.value, period.value, description.value], {
+    clipPath: "inset(0 100% 0 0)", // Masquer le texte de bas en haut
+    duration: 0.5,
+    ease: "power1.inOut",
+  });
+
+  gsap.to(".flex div", {
+    opacity: 0, // Masquer les blocs
+    y: 100, // Descendre hors de la vue
+    duration: 0.5,
+    stagger: 0.2, // Délai entre chaque bloc
+    onComplete: () => {
+      next();
+    },
+  });
 });
 </script>
 

@@ -11,42 +11,80 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
 onMounted(() => {
-  const panels = gsap.utils.toArray(".panel") as any;
-  // we'll create a ScrollTrigger for each panel just to track when each panel's top hits the top of the viewport (we only need this for snapping)
-  const tops = panels.map((panel: any) =>
-    ScrollTrigger.create({ trigger: panel, start: "top top" })
+  gsap.registerPlugin(ScrollTrigger);
+
+  const panels = gsap.utils.toArray(".panel") as HTMLElement[];
+
+  if (panels.length === 0) {
+    console.error(
+      "No panels found. Check if the `.panel` class exists in the DOM."
+    );
+    return;
+  }
+
+  // Stockez les triggers des panneaux
+  const tops = panels.map((panel) =>
+    ScrollTrigger.create({
+      trigger: panel,
+      start: "top top",
+      invalidateOnRefresh: true, // Recalcul automatique
+    })
   );
 
-  panels.forEach((panel: any) => {
+  // Ajoutez un ScrollTrigger à chaque panneau
+  panels.forEach((panel) => {
     ScrollTrigger.create({
-      trigger: panel as any,
+      trigger: panel,
       start: () =>
-        panel.offsetHeight < window.innerHeight ? "top top" : "bottom bottom", // if it's shorter than the viewport, we prefer to pin it at the top
+        panel.offsetHeight < window.innerHeight ? "top top" : "bottom bottom",
       pin: true,
       pinSpacing: false,
+      invalidateOnRefresh: true, // Recalcul automatique si les dimensions changent
     });
   });
 
+  // Snap logic
   ScrollTrigger.create({
     snap: {
       snapTo: (progress, self) => {
-        const panelStarts = tops.map((st: any) => st.start), // an Array of all the starting scroll positions. We do this on each scroll to make sure it's totally responsive. Starting positions may change when the user resizes the viewport
-          snapScroll = gsap.utils.snap(panelStarts, self!.scroll()); // find the closest one
+        // Vérifiez si `self.scroll` est défini
+        if (!self?.scroll()) {
+          console.warn("Scroll is undefined. Snapping is skipped.");
+          return progress; // Retourne la progression actuelle pour éviter le snapping
+        }
+
+        // Recalculez les points de départ des panneaux
+        const panelStarts = tops.map((st) => st.start);
+
+        // Si tous les `panelStarts` sont à 0, ignorez le snapping
+        if (panelStarts.every((start) => start === 0)) {
+          console.warn("Panel starts are all 0. Skipping snapping.");
+          return progress;
+        }
+
+        const currentScroll = self.scroll();
+        const snapScroll = gsap.utils.snap(panelStarts, currentScroll);
+
+        console.log("Current Scroll:", currentScroll);
+        console.log("Snap Scroll:", snapScroll);
+
         return gsap.utils.normalize(
           0,
           ScrollTrigger.maxScroll(window),
           snapScroll
-        ); // snapping requires a progress value, so convert the scroll position into a normalized progress value between 0 and 1
+        );
       },
       duration: 0.5,
     },
   });
+
+  // Rafraîchissez tout après initialisation
+  ScrollTrigger.refresh();
 });
 </script>

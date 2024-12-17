@@ -4,7 +4,7 @@
       <h1 ref="textH1" class="text-7xl font-bold">salut</h1>
       <span ref="period">salut 2</span>
     </div>
-    <p class="self-center" ref="description">
+    <p ref="description" class="self-center">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
       quisquam expedita animi blanditiis fugiat consequuntur soluta atque esse
       eum labore vitae aspernatur impedit, nostrum deleniti voluptate dolores

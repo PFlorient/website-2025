@@ -1,12 +1,27 @@
 <template>
   <div class="content">
-    <div class="panel"><ProjectSection title="test" img="" /></div>
-    <div class="panel">
+    <div class="panel" ref="panelRefs">
+      <ProjectSection title="test" img="" :isActive="activePanels[0]" />
+    </div>
+    <div class="panel" ref="panelRefs">
       <ProjectSection
         title="test 2"
         img=""
         :animation="true"
         :inverted="true"
+        :isActive="activePanels[1]"
+      />
+    </div>
+    <div class="panel" ref="panelRefs">
+      <ProjectSection title="test 3" img="" :isActive="activePanels[2]" />
+    </div>
+    <div class="panel" ref="panelRefs">
+      <ProjectSection
+        title="test 3"
+        img=""
+        :animation="true"
+        :inverted="true"
+        :isActive="activePanels[3]"
       />
     </div>
   </div>
@@ -16,10 +31,15 @@
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
+const panelRefs = ref<(HTMLElement | null)[]>([]);
+const activePanels = ref<boolean[]>([]);
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
 
   const panels = gsap.utils.toArray(".panel") as HTMLElement[];
+  panelRefs.value = Array.from(
+    document.querySelectorAll(".panel")
+  ) as HTMLElement[];
 
   if (panels.length === 0) {
     console.error(
@@ -46,6 +66,25 @@ onMounted(() => {
       pin: true,
       pinSpacing: false,
       invalidateOnRefresh: true, // Recalcul automatique si les dimensions changent
+    });
+  });
+  panelRefs.value.forEach((panel, index) => {
+    ScrollTrigger.create({
+      trigger: panel,
+      start: "top 80%", // 80% de la hauteur de la page
+      end: "bottom 20%", // Sortie à 20% restant
+      onEnter: () => {
+        activePanels.value[index] = true;
+      },
+      onLeave: () => {
+        activePanels.value[index] = false;
+      },
+      onEnterBack: () => {
+        activePanels.value[index] = true;
+      },
+      onLeaveBack: () => {
+        activePanels.value[index] = false;
+      },
     });
   });
 

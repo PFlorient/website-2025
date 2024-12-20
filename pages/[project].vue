@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="flex w-full justify-between self-center">
+    <div class="flex w-full justify-between flex-col lg:flex-row self-center">
       <h1 ref="textH1" class="text-7xl font-bold">salut</h1>
       <span ref="period">salut 2</span>
     </div>
@@ -13,7 +13,7 @@
       incidunt vitae itaque sit dolores quam, impedit repudiandae, saepe maxime
       quibusdam esse inventore. lorem Lorem ipsum dolor sit amet consectetur a
     </p>
-    <div class="flex w-full justify-between gap-14">
+    <div class="flex w-full flex-wrap justify-between gap-14">
       <div class="test w-full block bg-emerald-400 h-40"></div>
       <div class="test w-full block bg-emerald-400 h-40"></div>
       <div class="test w-full block bg-emerald-400 h-40"></div>

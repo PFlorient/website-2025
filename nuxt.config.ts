@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxt/eslint",
     "@vueuse/nuxt",
+    "@nuxtjs/supabase",
   ],
   css: ["~/assets/css/main.css"],
   components: [

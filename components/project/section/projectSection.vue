@@ -14,12 +14,11 @@
         <!-- Conteneur pour le texte -->
         <div
           ref="leftRef"
-          class="text-container absolute top-0 h-full flex items-end p-8 bg-secondary z-10"
+          class="text-container absolute top-0 flex items-end p-8 bg-secondary z-10 h-1/2 w-full lg:h-full lg:w-1/2"
           :class="[
-            'w-1/2',
             inverted
-              ? 'right-0'
-              : 'left-0' /* Position correcte selon inverted */,
+              ? 'lg:right-0'
+              : 'lg:left-0' /* Position correcte selon inverted */,
           ]"
         >
           <h2 ref="textH2" class="text-6xl font-bold font-neueMetana">
@@ -30,12 +29,11 @@
         <!-- Image -->
         <img
           ref="rightRef"
-          class="absolute top-0 h-full object-cover z-0"
+          class="absolute h-full object-cover z-0 w-full top-1/2 lg:top-0 lg:w-1/2"
           :class="[
-            'w-1/2',
             inverted
-              ? 'left-0'
-              : 'right-0' /* Position correcte selon inverted */,
+              ? 'lg:left-0'
+              : 'lg:right-0' /* Position correcte selon inverted */,
           ]"
           src="https://picsum.photos/200/300"
           alt=""

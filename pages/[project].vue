@@ -1,34 +1,41 @@
 <template>
   <div class="container">
     <div class="flex w-full justify-between flex-col lg:flex-row self-center">
-      <h1 ref="textH1" class="text-7xl font-bold">salut</h1>
+      <h1 ref="textH1" class="text-5xl lg:text-7xl font-bold">
+        {{ infoProject?.name }}
+      </h1>
       <span ref="period">salut 2</span>
     </div>
-    <p ref="description" class="self-center">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-      quisquam expedita animi blanditiis fugiat consequuntur soluta atque esse
-      eum labore vitae aspernatur impedit, nostrum deleniti voluptate dolores
-      dolore tempora eos. Lorem ipsum dolor sit amet, consectetur adipisicing
-      elit. Tempore rerum ratione vero veniam quisquam. Eligendi animi aliquam
-      incidunt vitae itaque sit dolores quam, impedit repudiandae, saepe maxime
-      quibusdam esse inventore. lorem Lorem ipsum dolor sit amet consectetur a
-    </p>
-    <div class="flex w-full flex-wrap justify-between gap-14">
-      <div class="test w-full block bg-emerald-400 h-40"></div>
-      <div class="test w-full block bg-emerald-400 h-40"></div>
-      <div class="test w-full block bg-emerald-400 h-40"></div>
-      <div class="test w-full block bg-emerald-400 h-40"></div>
+    <p
+      ref="description"
+      class="self-center"
+      v-html="infoProject?.description"
+    ></p>
+    <div
+      class="flex w-full flex-wrap lg:flex-nowrap justify-around lg:justify-between items-center gap-7 lg:gap-14"
+    >
+      <img
+        v-for="image in infoProject?.pictures"
+        :key="image"
+        :src="`/img/${infoProject?.name}/${image}`"
+        alt=""
+        class="object-contain w-[calc(50%_-_1rem)] lg:w-full"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { gsap } from "gsap";
+import { useProjectStore } from "../store/project";
 
 const textH1 = ref<HTMLElement | null>(null);
 const period = ref<HTMLElement | null>(null);
 const description = ref<HTMLElement | null>(null);
-
+const route = useRoute();
+const projectStore = useProjectStore();
+const currentProject = route.params.project;
+const infoProject = projectStore.getProjectInfo(currentProject as string);
 onMounted(() => {
   const timeline = gsap.timeline();
 
@@ -37,7 +44,7 @@ onMounted(() => {
     clipPath: "inset(0 100% 0 0)", // Masquer initialement
   });
 
-  gsap.set(".flex div", {
+  gsap.set(".flex img", {
     opacity: 0, // Masquer les blocs initialement
     y: 100, // Positionner en dehors de la vue
   });
@@ -56,7 +63,7 @@ onMounted(() => {
         ease: "power1.inOut",
       })
       .to(
-        ".flex div",
+        ".flex img",
         {
           opacity: 1, // Rendre visible
           y: 0, // Revenir à la position initiale
@@ -76,7 +83,7 @@ onBeforeRouteLeave((to, from, next) => {
     ease: "power1.inOut",
   });
 
-  gsap.to(".flex div", {
+  gsap.to(".flex img", {
     opacity: 0, // Masquer les blocs
     y: 100, // Descendre hors de la vue
     duration: 0.5,

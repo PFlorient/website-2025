@@ -6,10 +6,3 @@
     <nuxt-link to="/about"><span>Info</span></nuxt-link>
   </nav>
 </template>
-<script setup lang="ts">
-// const { $event } = useNuxtApp();
-
-// const clickInfo = () => {
-//   $event("click:info");
-// };
-</script>

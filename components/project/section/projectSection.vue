@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="`/${props.title}`" @click="console.log('test')"
+  <nuxt-link :to="`/${props.title}`"
     ><div
       class="section-link"
       :class="{ inverted: inverted, active: isActive }"
@@ -35,7 +35,7 @@
               ? 'lg:left-0'
               : 'lg:right-0' /* Position correcte selon inverted */,
           ]"
-          src="https://picsum.photos/200/300"
+          :src="`/img/${img}`"
           alt=""
         />
       </section></div

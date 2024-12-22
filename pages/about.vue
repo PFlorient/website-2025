@@ -18,7 +18,9 @@
       <br />
       Au plaisir d'un jour échanger avec vous !
     </p>
-    <div class="flex w-full justify-between items-end p-4 font-neueMetana">
+    <div
+      class="footer flex w-full justify-between items-end p-4 font-neueMetana"
+    >
       <span
         ><a href="https://www.linkedin.com/in/florient-plouvin/" target="_blank"
           >LinkedIn</a
@@ -44,7 +46,7 @@ onMounted(() => {
     clipPath: "inset(0 100% 0 0)", // Masquer initialement
   });
 
-  gsap.set(".flex div", {
+  gsap.set(".footer", {
     opacity: 0, // Masquer les blocs initialement
     y: 100, // Positionner en dehors de la vue
   });
@@ -63,7 +65,7 @@ onMounted(() => {
         ease: "power1.inOut",
       })
       .to(
-        ".flex div",
+        ".footer",
         {
           opacity: 1, // Rendre visible
           y: 0, // Revenir à la position initiale
@@ -83,7 +85,7 @@ onBeforeRouteLeave((to, from, next) => {
     ease: "power1.inOut",
   });
 
-  gsap.to(".flex div", {
+  gsap.to(".footer", {
     opacity: 0, // Masquer les blocs
     y: 100, // Descendre hors de la vue
     duration: 0.5,

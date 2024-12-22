@@ -1,27 +1,16 @@
 <template>
   <div class="content">
-    <div class="panel" ref="panelRefs">
-      <ProjectSection title="test" img="" :isActive="activePanels[0]" />
-    </div>
-    <div class="panel" ref="panelRefs">
+    <div
+      v-for="(project, index) in projectsList"
+      ref="panelRefs"
+      :key="index"
+      class="panel"
+    >
       <ProjectSection
-        title="test 2"
-        img=""
-        :animation="true"
-        :inverted="true"
-        :isActive="activePanels[1]"
-      />
-    </div>
-    <div class="panel" ref="panelRefs">
-      <ProjectSection title="test 3" img="" :isActive="activePanels[2]" />
-    </div>
-    <div class="panel" ref="panelRefs">
-      <ProjectSection
-        title="test 3"
-        img=""
-        :animation="true"
-        :inverted="true"
-        :isActive="activePanels[3]"
+        :title="project.title"
+        :img="project.mainImage"
+        :is-active="activePanels[index]"
+        :inverted="index % 2 === 0"
       />
     </div>
   </div>
@@ -30,9 +19,13 @@
 <script setup lang="ts">
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useProjectStore } from "../store/project";
 
 const panelRefs = ref<(HTMLElement | null)[]>([]);
 const activePanels = ref<boolean[]>([]);
+
+const projectStore = useProjectStore();
+const projectsList = projectStore.getProjects;
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
 
@@ -109,9 +102,6 @@ onMounted(() => {
 
         const currentScroll = self.scroll();
         const snapScroll = gsap.utils.snap(panelStarts, currentScroll);
-
-        console.log("Current Scroll:", currentScroll);
-        console.log("Snap Scroll:", snapScroll);
 
         return gsap.utils.normalize(
           0,

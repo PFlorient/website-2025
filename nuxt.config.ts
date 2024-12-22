@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@vueuse/nuxt",
     "@nuxtjs/supabase",
+    "@pinia/nuxt",
   ],
   css: ["~/assets/css/main.css"],
   components: [
@@ -18,5 +19,8 @@ export default defineNuxtConfig({
   ],
   typescript: {
     typeCheck: true,
+  },
+  supabase: {
+    redirect: false,
   },
 });

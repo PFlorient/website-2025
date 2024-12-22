@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="flex w-full justify-between flex-col lg:flex-row self-center">
-      <h1 ref="textH1" class="text-5xl lg:text-7xl font-bold">
+      <h1 ref="textH1" class="text-4xl lg:text-7xl font-bold">
         {{ infoProject?.name }}
       </h1>
       <span ref="period">salut 2</span>

@@ -21,7 +21,10 @@
               : 'lg:left-0' /* Position correcte selon inverted */,
           ]"
         >
-          <h2 ref="textH2" class="text-6xl font-bold font-neueMetana">
+          <h2
+            ref="textH2"
+            class="text-4xl lg:text-7xl font-bold font-neueMetana"
+          >
             {{ title }}
           </h2>
         </div>

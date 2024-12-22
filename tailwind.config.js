@@ -11,6 +11,9 @@ export default {
         neueMetana: ["Neue-Metana", "sans-serif"],
         lato: ["Lato", "sans-serif"],
       },
+      spacing: {
+        "1/10": "10%",
+      },
     },
   },
   plugins: [],

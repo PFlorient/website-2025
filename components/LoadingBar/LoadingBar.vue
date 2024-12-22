@@ -59,16 +59,17 @@ onMounted(() => {
         onComplete: () => {
           gsap.to(dot1El, {
             opacity: 1,
-            bottom: "15%",
-            duration: 0.5,
+            bottom: "10%",
+            duration: 0.7,
           });
           gsap.to(dot2El, {
+            delay: 0.1,
             opacity: 1,
             bottom: "25%",
-            duration: 0.5,
+            duration: 0.6,
           });
           timeline.to(bigLayoutEl, {
-            delay: 0.7,
+            delay: 1,
             y: "-100%",
             duration: 0.8,
             ease: "power2.easeInOut",
@@ -96,29 +97,4 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-.big-layout {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff; /* Fond blanc */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transform: translateY(0); /* Position initiale à 0 */
-}
-.loading-container {
-  width: 10%;
-  height: 5rem;
-}
-
-.loading-bar {
-  position: relative;
-  height: 4px;
-  width: 0%; /* La barre commence à 0 */
-  background: #000; /* Couleur de la barre */
-}
-</style>
+<style scoped></style>

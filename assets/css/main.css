@@ -27,4 +27,15 @@
   h1 {
     @apply font-neueMetana;
   }
+
+  .big-layout {
+    @apply fixed top-0 left-0 w-full h-full bg-secondary flex justify-center items-center z-[9999];
+    transform: translateY(0); /* Position initiale à 0 */
+  }
+  .loading-container {
+    @apply w-1/3 lg:w-1/10 h-20;
+  }
+  .loading-bar {
+    @apply relative h-1 w-0 bg-primary;
+  }
 }

@@ -15,4 +15,4 @@ ENV HOST=0.0.0.0 PORT=3000 NODE_ENV=production
 RUN apk add --no-cache dumb-init \
     && rm -rf /tmp/*
 RUN npm i --save-dev @types/nodemailer && npm install && npm run build
-CMD ["dumb-init","node","./dist/server/entry.mjs"]
+CMD ["dumb-init","node",".output/server/index.mjs"]

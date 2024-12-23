@@ -44,7 +44,6 @@ run: ## Démarre un container
 	$(DOCKER_COMPOSE) run --rm --no-deps $(c) $(cmd)
 
 npm-install: ## Lance yarn install
-	$(NPM) cache clean
 	$(NPM) install
 
 nuxt-build: ## Build l'appli nuxt

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-info">
+  <div class="container-info" @click="() => navigateTo('/')">
     <div class="flex w-full justify-between self-end px-4 lg:px-28">
       <h1 ref="textH1" class="text-5xl font-bold">Hey moi c'est Florient !</h1>
     </div>
@@ -22,12 +22,20 @@
       class="footer flex w-full justify-between items-end p-4 font-neueMetana"
     >
       <span
-        ><a href="https://www.linkedin.com/in/florient-plouvin/" target="_blank"
+        ><a
+          href="https://www.linkedin.com/in/florient-plouvin/"
+          target="_blank"
+          @click.stop
           >LinkedIn</a
         >
-        | <a href="" target="_blank">Github</a></span
+        |
+        <a href="https://github.com/PFlorient" target="_blank" @click.stop
+          >Github</a
+        ></span
       >
-      <span>contact</span>
+      <span
+        ><a href="mailto:dev.fplouvin@proton.me" @click.stop>Contact</a></span
+      >
     </div>
   </div>
 </template>

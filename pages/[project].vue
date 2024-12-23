@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" @click="() => navigateTo('/')">
     <div class="flex w-full justify-between flex-col lg:flex-row self-center">
       <h1 ref="textH1" class="text-4xl lg:text-7xl font-bold">
         {{ infoProject?.name }}

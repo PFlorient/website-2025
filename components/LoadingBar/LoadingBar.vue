@@ -59,7 +59,7 @@ onMounted(() => {
         onComplete: () => {
           gsap.to(dot1El, {
             opacity: 1,
-            bottom: "10%",
+            bottom: "0%",
             duration: 0.7,
           });
           gsap.to(dot2El, {

@@ -1,0 +1,11 @@
+services:
+  node:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile
+      target: ${ENVIRONMENT_TYPE}
+    command: >
+      sh -c "npm run build && node ./dist/server/entry.mjs"
+    volumes:
+      - ../..:/app
+    container_name: ${COMPOSE_PROJECT_NAME}

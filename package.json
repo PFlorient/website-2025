@@ -12,6 +12,7 @@
     "format": "prettier --write \"{components,pages,plugins,middleware,layouts,composables,assets}/**/*.{js,jsx,ts,tsx,vue,html,css,scss,json,md}\""
   },
   "dependencies": {
+    "@nuxt/eslint": "^0.7.4",
     "@nuxtjs/i18n": "^9.1.1",
     "@nuxtjs/supabase": "^1.4.5",
     "@nuxtjs/tailwindcss": "^6.12.2",
@@ -25,7 +26,6 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.7.3",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",

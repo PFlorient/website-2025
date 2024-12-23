@@ -43,16 +43,20 @@ run: ## Démarre un container
 	$(eval cmd := sh)
 	$(DOCKER_COMPOSE) run --rm --no-deps $(c) $(cmd)
 
-yarn-install: ## Lance yarn install
+npm-install: ## Lance yarn install
 	$(NPM) cache clean
 	$(NPM) install
+
+nuxt-build: ## Build l'appli nuxt
+	$(NPM) run build
 
 init: ## Initialise le projet
 	$(MAKE) build nuxt-build
 	$(MAKE) up
 
+
 dev: ## Démarre l'appli nuxt
-	$(npm) run dev --open
+	$(npm) run dev
 
 server-prod: ##Lance le serveur de prod de l'application Nuxt
 	$(DOCKER_COMPOSE) run --rm node .output/server/index.mjs

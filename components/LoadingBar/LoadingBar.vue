@@ -78,10 +78,6 @@ onMounted(() => {
         },
       });
     }
-
-    if (progress.value === 100) {
-      // Animation de remontée immédiate après la barre complétée
-    }
   };
 
   // Suivre les ressources en temps réel

@@ -1,10 +1,16 @@
-# Nuxt Minimal Starter
+# Refonte du CV 
+Projet de refonte de CV initialisé en décembre 2024
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Objectif : Avoir une page web synthétisant différent projet. 
 
+Todo : 
+- Passer en I18n pour les texts
+- Ajouter les tests unitaire
+- Ajouter un konami code qui change l'interface
+
+Production ici  : [https://florient.fr/](https://florient.fr/)
 ## Setup
-
-Make sure to install dependencies:
+Manière classique
 
 ```bash
 # npm
@@ -20,10 +26,19 @@ yarn install
 bun install
 ```
 
+ou via docker 
+
+```bash 
+make init
+```
+
+Pense a config le .env en definissant l'url et la clef supabase. 
+
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Le serveur se lance sur `http://localhost:3000`:
 
+Tu peux au choix lancer 
 ```bash
 # npm
 npm run dev
@@ -38,38 +53,14 @@ yarn dev
 bun run dev
 ```
 
+ou passer par docker en faisant la commande make
+
+```bash 
+make dev
+```
+
 ## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+Utilise la commande make
+```bash 
+make server-prod 
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

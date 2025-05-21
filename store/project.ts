@@ -13,9 +13,19 @@ export const useProjectStore = defineStore("project", {
   }),
   actions: {
     async fetchProjects() {
-      const { data } = await useFetch("/api/projects");
-      const projects = data.value as Project[];
-      this.projects = projects;
+      try {
+        const { data, error } = await useFetch<Project[]>("/api/projects");
+
+        if (error.value || !data.value || !Array.isArray(data.value)) {
+          this.projects = [];
+          return;
+        }
+
+        this.projects = data.value;
+      } catch (e) {
+        console.error("Error api/projects", e);
+        this.projects = [];
+      }
     },
   },
   getters: {
